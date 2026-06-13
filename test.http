@@ -1,0 +1,45 @@
+### Health Check (Verify if the server is running)
+GET http://localhost:3001/
+
+### Read All Employees (or with Search / Sort)
+GET http://localhost:3001/employees
+
+### Search Employees by Query
+GET http://localhost:3001/employees?q=Ahmad
+
+### Sort Employees by Salary (Descending)
+GET http://localhost:3001/employees?sortBy=salary&order=desc
+
+### Create a New Employee 
+POST http://localhost:3001/employees 
+Content-Type: application/json 
+  
+{ 
+  "empId": "EMP008", 
+  "name": "Devi a/p Loganathan", 
+  "email": "devi.l@company.my", 
+  "department": "Operations", 
+  "position": "Operations Executive", 
+  "hireDate": "2026-01-10", 
+  "salary": 3400.00, 
+  "active": true 
+} 
+  
+### Update Employee Details
+# Note: Instead of an auto-incremented database number (like /6), 
+# use the explicit string 'empId' value in the URL path (e.g., /EMP008)
+PUT http://localhost:3001/employees/EMP008 
+Content-Type: application/json 
+  
+{ 
+  "name": "Devi Loganathan (Promoted)", 
+  "email": "devi.l@company.my", 
+  "department": "Operations", 
+  "position": "Operations Manager", 
+  "hireDate": "2026-01-10", 
+  "salary": 4500.00, 
+  "active": true 
+} 
+  
+### Delete Employee Record
+DELETE http://localhost:3001/employees/EMP008

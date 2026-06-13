@@ -1,0 +1,47 @@
+/* Core Document and Corporate Canvas */
+body { font-family: system-ui, sans-serif; background: #f8fafc; 
+       margin: 0; color: #0f172a; } 
+
+/* Shifted header background from Teal (#0f766e) to Dark Slate/Navy (#1e293b) */
+header { background: #1e293b; color: white; padding: 1.2rem 2rem; } 
+header h1 { margin: 0; font-size: 1.6rem; } 
+header .subtitle { margin: 0.2rem 0 0; opacity: 0.85; font-size: 0.9rem; } 
+main   { max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; 
+         display: grid; gap: 1.5rem; } 
+  
+/* Renamed classes to .employee-form and .employee-table while maintaining box rules */
+.employee-form, .employee-table { 
+  background: white; padding: 1rem 1.2rem; 
+  border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); 
+} 
+.employee-form label { display: block; margin: 0.5rem 0; font-size: 0.9rem; } 
+.employee-form input, .employee-form select { 
+  display: block; width: 100%; padding: 0.45rem 0.6rem; margin-top: 0.25rem; 
+  border: 1px solid #cbd5e1; border-radius: 4px; 
+} 
+.employee-form .err { color: #b91c1c; font-size: 0.78rem; } 
+
+/* Shifted interactive primary button from Teal to Royal Indigo (#4f46e5) */
+.employee-form button { padding: 0.45rem 1rem; border: 0; 
+  background: #4f46e5; color: white; border-radius: 4px; cursor: pointer; } 
+.employee-form button.danger, 
+.employee-table .danger { background: #b91c1c; } 
+  
+/* Tabular Directory Layout Controls */
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; } 
+th, td { text-align: left; padding: 0.55rem 0.6rem; 
+         border-bottom: 1px solid #e2e8f0; vertical-align: top; } 
+th { background: #f1f5f9; } 
+
+/* Shifted monospace tokens from Teal to an Elegant Slate tint (#e2e8f0 / #334155) */
+code { background: #e2e8f0; color: #334155; 
+       padding: 0.15rem 0.4rem; border-radius: 4px; } 
+.muted { font-size: 0.78rem; color: #64748b; } 
+.badge { display: inline-block; padding: 0.15rem 0.5rem; 
+         border-radius: 999px; font-size: 0.75rem; }
+
+/* Status Badging Matrix & System States */
+.badge.ok { background: #d1fae5; color: #065f46; } 
+.badge.no { background: #fee2e2; color: #991b1b; } 
+.error   { background: #fee2e2; color: #991b1b; padding: 0.6rem 1rem; border-radius: 6px; } 
+.loading { color: #64748b; font-style: italic; }
