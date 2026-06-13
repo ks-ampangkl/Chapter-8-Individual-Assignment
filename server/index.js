@@ -14,12 +14,16 @@ app.get('/', (req, res) => res.json({ status: 'ok' }))
 // --- READ list (with optional search & sort) --- 
 app.get('/employees', async (req, res) => { 
   try { 
-    const { q, sortBy, order } = req.query 
+    // 1. Extract values and guarantee empty queries are handled as clean strings
+    const q = req.query.q ? req.query.q.trim() : '';
+    const sortBy = req.query.sortBy || '';
+    const order = req.query.order === 'desc' ? 'DESC' : 'ASC';
+
     let sql = 'SELECT * FROM employees' 
     const params = [] 
   
-    // Server-side search using SQL LIKE on at least three columns (name, empId, email) 
-    if (q) { 
+    // 2. Only apply the WHERE filter if 'q' actually contains search text
+    if (q !== '') { 
       sql += ` WHERE name LIKE ? 
                   OR empId LIKE ? 
                   OR email LIKE ?` 
@@ -30,8 +34,7 @@ app.get('/employees', async (req, res) => {
     // Whitelisted server-side sorting (name, hireDate, salary) 
     const allowedSort = ['name', 'hireDate', 'salary'] 
     if (sortBy && allowedSort.includes(sortBy)) { 
-      const direction = order === 'desc' ? 'DESC' : 'ASC' 
-      sql += ` ORDER BY ${sortBy} ${direction}` 
+      sql += ` ORDER BY ${sortBy} ${order}` 
     } else {
       // Default fallback sorting column
       sql += ` ORDER BY empId ASC`
@@ -40,11 +43,10 @@ app.get('/employees', async (req, res) => {
     const [rows] = await pool.query(sql, params) 
     res.json(rows) 
   } catch (err) { 
-    console.error(err) 
+    console.error("Database query crash logs:", err) 
     res.status(500).json({ error: 'Database error' }) 
   } 
-}) 
-  
+})
 // --- READ single --- 
 app.get('/employees/:id', async (req, res) => { 
   try { 
